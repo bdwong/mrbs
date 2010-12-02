@@ -244,4 +244,13 @@ $vocab["for_any_questions"]  = ",關於任何在這裡找不到答案的問題."
 // Used in mysql.inc AND pgsql.inc
 $vocab["failed_connect_db"]  = "Fatal Error: 無法連上資料庫";
 
+// Language stuff
+$vocab["language"] = "語言：";
+
+// The format for language codes are as follows: "Translated language name - Native language name"
+// Except the current language will just have "Language Name" because both are the same.
+$vocab["en_CA"] = "英語 - English";
+$vocab["zh_TW"] = "中文（繁體）";
+$vocab["zh_CN"] = "中文（簡體） - 中文（简体）";
+
 ?>
