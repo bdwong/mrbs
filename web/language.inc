@@ -348,72 +348,94 @@ include "lang." . $default_language_tokens;
 // locales on your system do "locale -a"
 setlocale(LC_ALL,'C');
 
-// We attempt to make up a sensible locale from the HTTP_ACCEPT_LANGUAGE
-// environment variable.
-
-// First we enumerate the user's language preferences...
-if (isset($HTTP_ACCEPT_LANGUAGE)) // Attempt to use $HTTP_ACCEPT_LANGUAGE only when defined.
-{
-  $lang_specifiers = explode(',',$HTTP_ACCEPT_LANGUAGE);
-  foreach ($lang_specifiers as $specifier)
-  {
-    if (preg_match('/([a-zA-Z\-]+);q=([0-9\.]+)/', $specifier, $matches))
-    {
-      $langs[$matches[1]] = $matches[2];
-    }
-    else if (preg_match("/([a-zA-Z\-]+)/", $specifier, $matches))
-    {
-      $langs[$matches[1]] = 1.0;
-    }
-  }
-  arsort($langs,SORT_NUMERIC);
-}
-else // Else use the value from config.inc.php.
-{
-  $langs[$default_language_tokens] = 1.0;
-}
-
 // The following attempts to import a language based on what the client
 // is using.
-
-if (!$disable_automatic_language_changing)
+function find_language_file($langs)
 {
-  $doneit = 0;
-
-  // First try for an exact match, so if the user specified en-gb, look
-  // for lang.en-gb
-
-  foreach ($langs as $lang => $qual)
+  global $locale;
+  if (!$disable_automatic_language_changing)
   {
-    $lang_file = "lang." . strtolower($lang);
-
-    if (file_exists($lang_file))
-    {
-      include $lang_file;
-      $doneit = 1;
-      $locale = $lang;
-      break;
-    }
-  }
-  if ($doneit == 0)
-  {
-    // None of the user's preferred languages was available, so try to
-    // find a lang file for one of the base languages, e.g. look for
-    // lang.en if "en-ca" was specified.
-
+    $doneit = 0;
+  
+    // First try for an exact match, so if the user specified en-gb, look
+    // for lang.en-gb
+  
     foreach ($langs as $lang => $qual)
     {
-      $lang_file = "lang." . strtolower(substr($lang,0,2));
-
+      $lang_file = "lang." . strtolower($lang);
+  
       if (file_exists($lang_file))
       {
         include $lang_file;
+        $doneit = 1;
         $locale = $lang;
         break;
       }
     }
+    if ($doneit == 0)
+    {
+      // None of the user's preferred languages was available, so try to
+      // find a lang file for one of the base languages, e.g. look for
+      // lang.en if "en-ca" was specified.
+  
+      foreach ($langs as $lang => $qual)
+      {
+        $lang_file = "lang." . strtolower(substr($lang,0,2));
+  
+        if (file_exists($lang_file))
+        {
+          include $lang_file;
+          $locale = $lang;
+          break;
+        }
+      }
+    }
   }
+  
+  return $lang_file;
 }
+
+// Attempt to get the language from override sources first.
+// Specifically requested language.
+unset($locale);
+if (!empty($_REQUEST['lang']))
+  $lang_file = find_language_file(array($_REQUEST['lang'] => 100));
+// Language stored in cookie.
+if (empty($locale) and !empty($_COOKIE['mrbs_lang']))
+  $lang_file = find_language_file(array($_COOKIE['mrbs_lang'] => 100));
+// We attempt to make up a sensible locale from the HTTP_ACCEPT_LANGUAGE
+// environment variable.
+if (empty($lang_file))
+{
+  // First we enumerate the user's language preferences...
+  if (isset($HTTP_ACCEPT_LANGUAGE)) // Attempt to use $HTTP_ACCEPT_LANGUAGE only when defined.
+  {
+    $lang_specifiers = explode(',',$HTTP_ACCEPT_LANGUAGE);
+    foreach ($lang_specifiers as $specifier)
+    {
+      if (preg_match('/([a-zA-Z\-]+);q=([0-9\.]+)/', $specifier, $matches))
+      {
+        $langs[$matches[1]] = $matches[2];
+      }
+      else if (preg_match("/([a-zA-Z\-]+)/", $specifier, $matches))
+      {
+        $langs[$matches[1]] = 1.0;
+      }
+    }
+    arsort($langs,SORT_NUMERIC);
+  }
+  else // Else use the value from config.inc.php.
+  {
+    $langs[$default_language_tokens] = 1.0;
+  }
+  $lang_file = find_language_file($langs);
+}
+
+// Must be done in global context.
+if (!empty($lang_file))
+  include $lang_file;
+// Save the locale in a cookie.
+setcookie ("mrbs_lang", $locale);
 
 //////////////////////////////////////////////////////////////////////
 // Locale handling

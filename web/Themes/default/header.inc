@@ -460,6 +460,15 @@ function init()
         </form>
       </td>
       <?php
+      // Language box
+      if (!empty($language_select_list))
+      {
+        echo "<form action=\"javascript:void()\" method=\"get\" id=\"language_form\"><div>";
+        gen_language_selector("en");
+        echo "</div></form>";
+      }
+      ?>
+      <?php
       // For session protocols that define their own logon box...
       if (function_exists('PrintLogonBox'))
       {

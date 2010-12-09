@@ -772,6 +772,13 @@ $disable_automatic_language_changing = 0;
 // have disabled automatic language changing above]
 $default_language_tokens = "en";
 
+// Set this to an array of language specifiers that you want to display
+// in the language selection list. If the array is empty, the language
+// selection list will be hidden.
+// Example:
+// $language_select_list = array("en-CA", "zh-TW", "zh-CN");
+$language_select_list = array();
+
 // Set this to a valid locale (for the OS you run the MRBS server on)
 // if you want to override the automatic locale determination MRBS
 // performs

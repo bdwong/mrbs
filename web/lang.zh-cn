@@ -249,8 +249,8 @@ $vocab["language"] = "语言：";
 
 // The format for language codes are as follows: "Translated language name - Native language name"
 // Except the current language will just have "Language Name" because both are the same.
-$vocab["en_CA"] = "英语 - English";
-$vocab["zh_TW"] = "中文（繁体） - 中文（繁體）";
-$vocab["zh_CN"] = "中文（简体）";
+$vocab["en-CA"] = "英语 - English";
+$vocab["zh-TW"] = "中文（繁体） - 中文（繁體）";
+$vocab["zh-CN"] = "中文（简体）";
 
 ?>
