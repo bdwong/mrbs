@@ -90,7 +90,7 @@ $url_base = "";
  *******************/
 
 // Choose a theme for the MRBS.   The theme controls two aspects of the look and feel:
-//   (a) the styling:  the most commonly changed colours, dimensions and fonts have been 
+//   (a) the styling:  the most commonly changed colours, dimensions and fonts have been
 //       extracted from the main CSS file and put into the styling.inc file in the appropriate
 //       directory in the Themes directory.   If you want to change the colour scheme, you should
 //       be able to do it by changing the values in the theme file.    More advanced styling changes
@@ -173,7 +173,7 @@ $eveningends           = 18;  // must be integer in range 0-23
 $eveningends_minutes   = 30;   // must be integer in range 0-59
 
 // Example 1.
-// If resolution=3600 (1 hour), morningstarts = 8 and morningstarts_minutes = 30 
+// If resolution=3600 (1 hour), morningstarts = 8 and morningstarts_minutes = 30
 // then for the last period to start at say 4:30pm you would need to set eveningends = 16
 // and eveningends_minutes = 30
 
@@ -208,7 +208,7 @@ $max_slots = 60;
 //
 // NOTE:  MRBS assumes that the descriptions are valid HTML and can be output
 // directly without any encoding.    Please ensure that any special characters
-// are encoded, eg '&' to '&amp;', '>' to '&gt;', lower case e acute to 
+// are encoded, eg '&' to '&amp;', '>' to '&gt;', lower case e acute to
 // '&eacute;' or '&#233;', etc.
 
 // NOTE:  The maximum number of periods is 60.   Do not define more than this.
@@ -282,7 +282,7 @@ $weekstarts = 0;
 // views.   You can alternatively arrange for them to be shown as narrow, greyed-out columns
 // by editing the CSS file.   Look for $column_hidden_width in mrbs.css.php.
 //
-// [Note that although they are hidden from display in the week and month views, they 
+// [Note that although they are hidden from display in the week and month views, they
 // can still be booked from the edit_entry form and you can display the bookings by
 // jumping straight into the day view from the date selector.]
 $hidden_days = array();
@@ -330,7 +330,7 @@ $mincals_week_numbers = FALSE;
 // rooms and not many time slots.
 $times_along_top = FALSE;
 
-// To display the row labels (times, rooms or days) on the right hand side as well as the 
+// To display the row labels (times, rooms or days) on the right hand side as well as the
 // left hand side in the day and week views, set to TRUE;
 // (was called $times_right_side in earlier versions of MRBS)
 $row_labels_both_sides = FALSE;
@@ -354,9 +354,9 @@ $default_room = 0;
 // gives a table where all the rows have the same hight, regardless of content.
 // Alternatively set to FALSE if you want the cells to expand to fit the content.
 // (FALSE not supported in IE6 and IE7 due to their incomplete CSS support)
-$clipped = TRUE;                
+$clipped = TRUE;
 
-// Define clipping behaviour for the cells in the month view.                           
+// Define clipping behaviour for the cells in the month view.
 // Set to TRUE if you want the cells in the month view to scroll if there are too
 // many bookings to display; set to FALSE if you want the table cell to expand to
 // accommodate the bookings.   (NOTE: (1) scrolling doesn't work in IE6 and so the table
@@ -365,7 +365,7 @@ $clipped = TRUE;
 $month_cell_scrolling = TRUE;
 
 // Define the maximum length of a string that can be displayed in an admin table cell
-// (eg the rooms and users lists) before it is truncated.  (This is necessary because 
+// (eg the rooms and users lists) before it is truncated.  (This is necessary because
 // you don't want a cell to contain for example a 2 kbyte text string, which could happen
 // with user defined fields).
 $max_content_length = 20;  // characters
@@ -373,7 +373,7 @@ $max_content_length = 20;  // characters
 // The maximum length of a database field for which a text input can be used on a form
 // (eg when editing a user or room).  If longer than this a text area will be used.
 $text_input_max = 70;  // characters
-                                
+
 
 /************************
  * Miscellaneous settings
@@ -387,7 +387,7 @@ $default_report_days = 60;
 
 // Control the active cursor in day/week/month views.   By default, highlighting
 // is implemented using the CSS :hover pseudo-class.    For old browers such as
-// IE6, this is not supported and MRBS will automatically switch over to use 
+// IE6, this is not supported and MRBS will automatically switch over to use
 // JavaScript highlighting - for which there are three different modes: 'bgcolor',
 // 'class' and 'hybrid'.  If clients have VERY old browsers, then you may even want
 // to disable the JavaScript highlighting by setting $javascript_cursor to false.
@@ -419,12 +419,12 @@ $private_default = FALSE;  // DEFAULT VALUE FOR NEW AREAS
            // Used even if checkbox is not displayed.
 
 $private_mandatory = FALSE;  // DEFAULT VALUE FOR NEW AREAS
-           // If TRUE all new/edited entries will 
+           // If TRUE all new/edited entries will
            // use the value from $private_default when saved.
            // If checkbox is displayed it will be disabled.
 
 $private_override = "none";  // DEFAULT VALUE FOR NEW AREAS
-           // Override default privacy behavior. 
+           // Override default privacy behavior.
            // "none" - Private flag on entry is used
            // "private" - ALL entries are treated as private regardless
            //             of private flag on the entry.
@@ -433,8 +433,8 @@ $private_override = "none";  // DEFAULT VALUE FOR NEW AREAS
            // Overrides $private_default and $private_mandatory
            // Consider your users' expectations of privacy before
            // changing to "public" or from "private" to "none"
-    
-                  
+
+
 // PROVISIONAL BOOKINGS SETTINGS - PER-AREA
 
 // These settings control whether provisional bookings should be used.
@@ -510,7 +510,7 @@ $cookie_path_override = '';
 // for whom admin rights are defined here.   After that this list is ignored.
 unset($auth["admin"]);              // Include this when copying to config.inc.php
 $auth["admin"][] = "127.0.0.1";     // localhost IP address. Useful with IP sessions.
-$auth["admin"][] = "administrator"; // A user name from the user list. Useful 
+$auth["admin"][] = "administrator"; // A user name from the user list. Useful
                                     // with most other session schemes.
 //$auth["admin"][] = "10.0.0.1";
 //$auth["admin"][] = "10.0.0.2";
@@ -653,7 +653,7 @@ $mail_settings['room_admin_on_bookings']    = FALSE;  // the room administrator
 $mail_settings['booker']                    = FALSE;  // the person making the booking
 $mail_settings['book_admin_on_provisional'] = FALSE;  // the booking administrator when provisional bookings are enabled
                                                       // (which is the MRBS admin, but this setting allows MRBS
-                                                      // to be extended to have separate booking approvers)     
+                                                      // to be extended to have separate booking approvers)
 
 // WHEN TO EMAIL
 // -------------
@@ -688,7 +688,7 @@ $mail_settings['admin_lang'] = 'en';   // Default is 'en'.
 // The email addresses of the MRBS administrator are set in the config file, and
 // those of the room and area administrators are set though the edit_area_room.php
 // in MRBS.    But if you have set $mail_settings['booker'] above to TRUE, MRBS will
-// need the email addresses of ordinary users.   If you are using the "db" 
+// need the email addresses of ordinary users.   If you are using the "db"
 // authentication method then MRBS will be able to get them from the users table.  But
 // if you are using any other authentication scheme then the following settings allow
 // you to specify a domain name that will be appended to the username to produce a
@@ -709,7 +709,7 @@ $mail_settings['admin_backend'] = 'mail';
 /*******************
  * Sendmail settings
  */
- 
+
 // Set the path of the Sendmail program (only used with "sendmail" backend).
 // Default is '/usr/bin/sendmail'
 $sendmail_settings['path'] = '/usr/bin/sendmail';
@@ -788,13 +788,13 @@ $override_locale = "";
 // IF your language faq file is available, set $faqfilelang to match the
 // end of the file name, including the underscore (ie. for site_faq_fr.html
 // use "_fr"
-$faqfilelang = ""; 
+$faqfilelang = "";
 
 
 /*************
  * Reports
  *************/
- 
+
 // Default CSV file names
 $report_filename  = "report.csv";
 $summary_filename = "summary.csv";
@@ -843,7 +843,7 @@ $typel["I"] = "I";
  ***************************************/
 
  define('DOCTYPE', '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">');
- 
+
  // Records which DOCTYPE is being used.    Do not change - it will not change the DOCTYPE
  // that is used;  it is merely used when the code needs to know the DOCTYPE, for example
  // in calls to nl2br.   TRUE means XHTML, FALSE means HTML.
@@ -864,7 +864,7 @@ define('STATUS_CONFIRMED',   1);
  /*************************************************
  * REPEAT TYPE CODES - internal use, do not change
  **************************************************/
- 
+
 define('REP_NONE',            0);
 define('REP_DAILY',           1);
 define('REP_WEEKLY',          2);
@@ -872,13 +872,14 @@ define('REP_MONTHLY',         3);
 define('REP_YEARLY',          4);
 define('REP_MONTHLY_SAMEDAY', 5);
 define('REP_N_WEEKLY',        6);
- 
+
 /********************************************************
  * PHP System Configuration - internal use, do not change
  ********************************************************/
 
 // Disable magic quoting on database returns:
-set_magic_quotes_runtime(0);
+// Removed in PHP 7.0.
+//set_magic_quotes_runtime(0);
 
 // Make sure notice errors are not reported, they can break mrbs code:
 $error_level = E_ALL ^ E_NOTICE;
